@@ -69,15 +69,16 @@ def call_llm(prompt: str) -> str:
         response = httpx.post(
             settings.LLM_API_ENDPOINT,
             headers={
-                "x-api-key": settings.LLM_API_KEY,
-                "content-type": "application/json",
-                "anthropic-version": "2023-06-01",
+                "Authorization": f"Bearer {settings.LLM_API_KEY}",
+                "Content-Type": "application/json",
             },
             json={
                 "model": settings.LLM_MODEL,
                 "max_tokens": 1024,
-                "system": prompts.SYSTEM_PROMPT,
-                "messages": [{"role": "user", "content": prompt}],
+                "messages": [
+                    {"role": "system", "content": prompts.SYSTEM_PROMPT},
+                    {"role": "user", "content": prompt},
+                ],
             },
             timeout=REQUEST_TIMEOUT_SECONDS,
         )
@@ -86,10 +87,8 @@ def call_llm(prompt: str) -> str:
     except Exception as error:  # noqa: BLE001 - every failure degrades identically
         raise LLMUnavailable(f"{type(error).__name__}: {error}") from error
 
-    blocks = body.get("content") or []
-    text = "".join(
-        block.get("text", "") for block in blocks if block.get("type") == "text"
-    ).strip()
+    choices = body.get("choices") or []
+    text = (choices[0].get("message", {}).get("content", "") if choices else "").strip()
     if not text:
         raise LLMUnavailable("the LLM returned an empty response")
     return text
