@@ -194,9 +194,11 @@ npm run dev
 Open http://localhost:5173 (CORS already allows this origin). The frontend calls the
 backend at `http://localhost:8000`.
 
-> **Note:** the trained model artifacts are **not** committed (gitignored). Until they are
-> restored under `models/`, the backend will transparently run in
-> `DETERMINISTIC_FALLBACK` mode and flag it — suitability scores are then `null`, by design.
+> **Note:** the trained model artifacts (`models/*.json`) and the loan catalogue
+> (`data/loan_products.csv`) **are committed**, so a fresh clone runs the full ML
+> pipeline — no manual restore and no `DETERMINISTIC_FALLBACK`. The personalization
+> database (`data/personalization.db`) stays gitignored and is created on first use.
+> For a GitHub-only deploy (e.g. Render), see `render.yaml`.
 
 ---
 
