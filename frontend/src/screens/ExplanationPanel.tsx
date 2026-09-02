@@ -107,7 +107,7 @@ function FactorGroup({
               <span className="truncate text-ink-soft">{prettyFeature(c.feature)}</span>
               <span
                 className={`shrink-0 font-mono text-xs font-medium ${
-                  tone === "good" ? "text-brand-dark" : "text-red-600"
+                  tone === "good" ? "text-emerald-700" : "text-red-600"
                 }`}
               >
                 {sign(c.contribution)}
@@ -117,7 +117,7 @@ function FactorGroup({
             <div className="mt-1 h-1.5 w-full overflow-hidden rounded-full bg-paper">
               <div
                 className={`h-full rounded-full ${
-                  tone === "good" ? "bg-brand" : "bg-red-400"
+                  tone === "good" ? "bg-emerald-500" : "bg-red-400"
                 }`}
                 style={{ width: `${(Math.abs(c.contribution) / maxAbs) * 100}%` }}
               />
