@@ -54,9 +54,16 @@ def _template(recommendation: Recommendation, reason: str) -> Explanation:
     )
 
 
+# Transient HTTP statuses that warrant a single retry: rate limits, request-too-large
+# and server errors. Auth (401/403) and not-found (404) are treated as permanent.
+TRANSIENT_STATUSES = {429, 500, 502, 503, 504, 413}
+
+
 def call_llm(prompt: str) -> str:
     """
-    One HTTP call. Isolated so tests can replace it without touching the guard logic.
+    One HTTP call, with a single retry on transient provider-side failures (rate
+    limits, 5xx, request-too-large). Isolated so tests can replace it without touching
+    the guard logic.
 
     Raises LLMUnavailable for every failure mode; the caller degrades to the template.
     """
@@ -65,7 +72,9 @@ def call_llm(prompt: str) -> str:
 
     import httpx
 
-    try:
+    last_response: httpx.Response | None = None
+    success: httpx.Response | None = None
+    for _ in range(2):
         response = httpx.post(
             settings.LLM_API_ENDPOINT,
             headers={
@@ -82,8 +91,24 @@ def call_llm(prompt: str) -> str:
             },
             timeout=REQUEST_TIMEOUT_SECONDS,
         )
-        response.raise_for_status()
-        body = response.json()
+        if response.is_success:
+            success = response
+            break
+        if response.status_code not in TRANSIENT_STATUSES:
+            response.raise_for_status()
+        last_response = response
+    if success is None:
+        # Both attempts failed on transient errors; a permanent error already raised
+        # above. Surface a clear degraded message rather than an opaque parse error.
+        last_status = (
+            last_response.status_code if last_response is not None else "unknown"
+        )
+        raise LLMUnavailable(
+            f"transient LLM failure after retry (status {last_status})"
+        )
+
+    try:
+        body = success.json()
     except Exception as error:  # noqa: BLE001 - every failure degrades identically
         raise LLMUnavailable(f"{type(error).__name__}: {error}") from error
 
