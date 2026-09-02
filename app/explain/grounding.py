@@ -186,8 +186,15 @@ def verify_numeric_grounding(response_text: str, payload: dict) -> GroundingChec
         number_start = match.start("number")
 
         # A number inside a word ("P1", "HOME-A2") is an identifier, not a figure.
+        # This also covers hyphenated identifiers like "EL-311" or "A2-48": a number
+        # directly preceded by a hyphen that itself follows a letter is part of an
+        # alphanumeric identifier such as a product id, never a rupee amount.
         preceding = response_text[max(0, number_start - 1) : number_start]
         if preceding.isalpha():
+            continue
+        if preceding == "-" and number_start >= 2 and response_text[
+            number_start - 2
+        ].isalpha():
             continue
         if _in_span(number_start, spans):
             continue
