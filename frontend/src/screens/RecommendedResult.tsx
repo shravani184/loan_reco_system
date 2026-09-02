@@ -58,26 +58,25 @@ function Headline({
 }) {
   return (
     <div className="card card-pad overflow-hidden">
-      <div className="relative -mx-6 -mt-6 mb-5 bg-gradient-to-r from-brand via-brand to-brand-dark px-6 pb-5 pt-6 text-white">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(600px_220px_at_85%_-20%,rgba(255,255,255,0.25),transparent_60%)]" />
-        <div className="relative flex flex-wrap items-center justify-between gap-4">
+      <div className="relative -mx-6 -mt-6 mb-5 border-b border-paper-line bg-brand-tint px-6 pb-5 pt-6">
+        <div className="flex flex-wrap items-center justify-between gap-4">
           <div>
-            <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-blue-100">
-              <span className="inline-block h-2 w-2 rounded-full bg-emerald-300" />
+            <div className="flex items-center gap-2 text-xs font-semibold text-brand-dark">
+              <span className="inline-block h-1.5 w-1.5 rounded-full bg-brand" />
               Recommended for you
             </div>
-            <h3 className="mt-1 text-2xl font-bold">{candidateTitle(winner)}</h3>
+            <h3 className="mt-1 text-2xl font-bold text-ink">{candidateTitle(winner)}</h3>
           </div>
           {suitability != null ? (
             <div className="text-right">
-              <div className="text-xs uppercase tracking-wide text-blue-100">ML suitability</div>
-              <div className="text-3xl font-extrabold">
+              <div className="text-xs text-ink-faint">ML suitability</div>
+              <div className="text-3xl font-bold text-ink">
                 {(suitability * 100).toFixed(1)}%
               </div>
             </div>
           ) : null}
         </div>
-        <div className="relative mt-4 grid grid-cols-2 gap-x-6 gap-y-3 sm:grid-cols-4">
+        <div className="mt-4 grid grid-cols-2 gap-x-6 gap-y-3 sm:grid-cols-4">
           <HeadlineStat label="Loan amount" value={rupees(winner.loan_amount)} />
           <HeadlineStat label="Tenure" value={yearsMonths(winner.tenure_months)} />
           <HeadlineStat label="Monthly EMI" value={rupees(winner.emi)} />
@@ -86,9 +85,9 @@ function Headline({
       </div>
 
       {suitability == null ? (
-        <p className="text-sm text-slate-500">
-          This option was selected by the deterministic fallback because the ML model is
-          unavailable, so no suitability score is shown.
+        <p className="text-sm text-ink-faint">
+          This option was selected by the fallback because the ML model is unavailable,
+          so no suitability score is shown.
         </p>
       ) : (
         <SuitabilityBar value={suitability} />
@@ -102,13 +101,13 @@ function SuitabilityBar({ value }: { value: number }) {
   const pctClamped = Math.min(100, Math.max(0, pct));
   return (
     <div>
-      <div className="mb-1 flex items-center justify-between text-xs text-slate-500">
+      <div className="mb-1 flex items-center justify-between text-xs text-ink-faint">
         <span>How well this fits your profile, scored by the model</span>
         <span className="font-semibold text-brand">{pct}%</span>
       </div>
-      <div className="h-2.5 w-full overflow-hidden rounded-full bg-slate-100">
+      <div className="h-2.5 w-full overflow-hidden rounded-full bg-paper">
         <div
-          className="h-full rounded-full bg-gradient-to-r from-brand-light to-brand transition-all"
+          className="h-full rounded-full bg-brand transition-all"
           style={{ width: `${pctClamped}%` }}
         />
       </div>
@@ -119,8 +118,8 @@ function SuitabilityBar({ value }: { value: number }) {
 function HeadlineStat({ label, value }: { label: string; value: string }) {
   return (
     <div>
-      <div className="text-xs uppercase tracking-wide text-blue-100">{label}</div>
-      <div className="text-lg font-semibold">{value}</div>
+      <div className="text-xs text-ink-faint">{label}</div>
+      <div className="text-lg font-semibold text-ink">{value}</div>
     </div>
   );
 }
@@ -138,24 +137,24 @@ function Alternatives({
   if (!next.length) return null;
   return (
     <div className="card card-pad">
-      <h3 className="text-base font-semibold text-slate-900">Alternatives</h3>
-      <p className="text-xs text-slate-500">
-        The next best options in the model's ranking order.
+      <h3 className="text-base font-semibold text-ink">Alternatives worth a look</h3>
+      <p className="text-xs text-ink-faint">
+        The next best options, in the model's order.
       </p>
       <ul className="mt-3 space-y-2">
         {next.slice(0, 4).map((a) => (
           <li
             key={a.candidate.candidate_id}
-            className="flex flex-wrap items-center justify-between gap-2 rounded-lg border border-slate-200 border-l-4 border-l-brand-light bg-white px-3 py-2.5 shadow-sm"
+            className="flex flex-wrap items-center justify-between gap-2 rounded-md border border-paper-line bg-white px-3 py-2.5"
           >
             <div className="text-sm">
-              <span className="font-medium">{candidateTitle(a.candidate)}</span>{" "}
-              <span className="text-slate-500">
+              <span className="font-medium text-ink">{candidateTitle(a.candidate)}</span>{" "}
+              <span className="text-ink-faint">
                 · {rupees(a.candidate.loan_amount)} ·{" "}
                 {yearsMonths(a.candidate.tenure_months)} · EMI {rupees(a.candidate.emi)}
               </span>
             </div>
-            <span className="rounded-full bg-brand/10 px-2 py-0.5 text-sm font-semibold text-brand">
+            <span className="text-sm font-semibold text-brand">
               {a.suitability == null ? "—" : `${(a.suitability * 100).toFixed(1)}%`}
             </span>
           </li>
@@ -192,37 +191,37 @@ function EliminatedOptions({
     <div className="card card-pad">
       <button
         onClick={() => setOpen((v) => !v)}
-        className="flex w-full items-center justify-between text-base font-semibold text-slate-900"
+        className="flex w-full items-center justify-between text-base font-semibold text-ink"
       >
         <span>Eliminated options</span>
-        <span className="text-sm text-slate-400">{open ? "Hide" : "Show"}</span>
+        <span className="text-sm text-ink-faint">{open ? "Hide" : "Show"}</span>
       </button>
       {open ? (
         <div className="mt-4 space-y-6">
           <EliminatedGroup
             title="You don't qualify for these"
-            note="This product requires a detail your profile doesn't meet."
+            note="This product needs a detail your profile doesn't meet."
             items={[]}
             categories={groupIneligible(coverage)}
-            color="bg-slate-100"
+            color="bg-paper"
           />
           <EliminatedGroup
-            title="You qualify, but it isn't a good fit for you"
+            title="You qualify, but it isn't a good fit"
             note="These cleared eligibility and feasibility but scored below the suitability threshold."
             items={below}
-            color="bg-amber-50"
+            color="bg-brand-tint"
           />
           {above.length ? (
             <EliminatedGroup
               title="Scored well but not selected"
               note="These were eligible and above threshold but lost to the winner in the model's ranking."
               items={above}
-              color="bg-emerald-50"
+              color="bg-paper"
             />
           ) : null}
         </div>
       ) : (
-        <div className="mt-1 text-xs text-slate-500">
+        <div className="mt-1 text-xs text-ink-faint">
           Products filtered out at eligibility, and options that cleared it but scored
           below the suitability threshold.
         </div>
@@ -246,10 +245,10 @@ function EliminatedGroup({
 }) {
   return (
     <div className={`rounded-md p-4 ${color}`}>
-      <div className="text-sm font-semibold text-slate-800">{title}</div>
-      <div className="mt-0.5 text-xs text-slate-600">{note}</div>
+      <div className="text-sm font-semibold text-ink">{title}</div>
+      <div className="mt-0.5 text-xs text-ink-faint">{note}</div>
       {categories ? (
-        <ul className="mt-2 space-y-1 text-xs text-slate-600">
+        <ul className="mt-2 space-y-1 text-xs text-ink-soft">
           {categories.map((c) => (
             <li key={c.label}>
               {c.count} product{c.count === 1 ? "" : "s"} — {c.label}
@@ -258,7 +257,7 @@ function EliminatedGroup({
         </ul>
       ) : null}
       {items.length ? (
-        <ul className="mt-2 space-y-1 text-xs text-slate-700">
+        <ul className="mt-2 space-y-1 text-xs text-ink-soft">
           {items.map((s) => (
             <li key={s.candidate.candidate_id}>
               {candidateTitle(s.candidate)} —{" "}

@@ -51,13 +51,11 @@ export default function PortfolioForm({
         borrow vs liquidate strategies. Skip it if you have no investments.
       </p>
 
-      <div className="mt-4 rounded-lg border border-sky-200 bg-gradient-to-r from-sky-50 to-blue-50 p-3 text-sm">
-        <span className="font-semibold text-sky-800">
-          Don't have investments?
-        </span>{" "}
-        <span className="text-sky-700">
+      <div className="mt-4 rounded-md border border-paper-line bg-brand-tint p-3 text-sm">
+        <span className="font-semibold text-brand-dark">No investments?</span>{" "}
+        <span className="text-ink-soft">
           Choose <span className="font-semibold">"Skip — I have no investments"</span>{" "}
-          to proceed on a pure-borrow basis.
+          and we'll look at borrowing in full instead.
         </span>
       </div>
 
@@ -66,12 +64,12 @@ export default function PortfolioForm({
           {holdings.map((h, i) => (
             <li
               key={i}
-              className="flex items-center justify-between rounded-md border border-slate-200 bg-slate-50 px-3 py-2 text-sm"
+              className="flex items-center justify-between rounded-md border border-paper-line bg-paper px-3 py-2 text-sm"
             >
               <span>
-                <span className="font-medium">{h.asset_type.replace(/_/g, " ").toLowerCase()}</span>{" "}
-                <span className="text-slate-500">
-                  — {h.current_value.toLocaleString("en-IN")}
+                <span className="font-medium text-ink">{h.asset_type.replace(/_/g, " ").toLowerCase()}</span>{" "}
+                <span className="text-ink-faint">
+                  — ₹{h.current_value.toLocaleString("en-IN")}
                 </span>
               </span>
               <button
@@ -84,7 +82,7 @@ export default function PortfolioForm({
           ))}
         </ul>
       ) : (
-        <p className="mt-4 text-sm text-slate-400">No holdings added.</p>
+        <p className="mt-4 text-sm text-ink-faint">Nothing added yet.</p>
       )}
 
       <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-4">

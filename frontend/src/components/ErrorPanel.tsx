@@ -8,7 +8,7 @@ export default function ErrorPanel({
   onRetry?: () => void;
 }) {
   return (
-    <div className="rounded-lg border border-red-200 bg-red-50 p-6 shadow-sm">
+    <div className="rounded-md border border-red-200 bg-red-50 p-6">
       <div className="flex items-start gap-3">
         <svg
           className="h-5 w-5 shrink-0 text-red-600"

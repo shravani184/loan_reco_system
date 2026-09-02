@@ -40,17 +40,17 @@ export default function StrategyComparison({
 
   return (
     <div className="card card-pad card-accent">
-      <h3 className="text-base font-semibold text-slate-900">Strategy comparison</h3>
-      <p className="text-xs text-slate-500">
-        How borrow vs liquidate changes your EMI, total interest and remaining
-        portfolio. This is the model's scored view across financing strategies.
+      <h3 className="text-base font-semibold text-ink">Strategy comparison</h3>
+      <p className="mt-1 text-xs text-ink-faint">
+        How borrowing vs liquidating changes your EMI, total interest and remaining
+        portfolio, in the model's scored view.
       </p>
       <div className="mt-4 h-72 w-full">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={data} margin={{ top: 10, right: 10, left: 10, bottom: 10 }}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" tick={{ fontSize: 11 }} />
-            <YAxis tick={{ fontSize: 11 }} tickFormatter={(v: number) => `${Math.round(v / 1000)}k`} />
+            <CartesianGrid strokeDasharray="3 3" stroke="#e9e2da" />
+            <XAxis dataKey="name" tick={{ fontSize: 11, fill: "#6b5f55" }} />
+            <YAxis tick={{ fontSize: 11, fill: "#6b5f55" }} tickFormatter={(v: number) => `${Math.round(v / 1000)}k`} />
             <Tooltip
               formatter={(value: number | string, name: string) => [
                 rupees(Number(value)),
@@ -58,9 +58,9 @@ export default function StrategyComparison({
               ]}
             />
             <Legend wrapperStyle={{ fontSize: 12 }} />
-            <Bar dataKey="EMI (₹)" fill="#1d4ed8" />
-            <Bar dataKey="Total interest (₹)" fill="#d97706" />
-            <Bar dataKey="Remaining portfolio (₹)" fill="#059669" />
+            <Bar dataKey="EMI (₹)" fill="#b3562b" />
+            <Bar dataKey="Total interest (₹)" fill="#d1794b" />
+            <Bar dataKey="Remaining portfolio (₹)" fill="#8f4322" />
           </BarChart>
         </ResponsiveContainer>
       </div>

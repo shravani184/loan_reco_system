@@ -40,9 +40,9 @@ export default function WhatIfPanel({
 
   return (
     <div className="card card-pad">
-      <h3 className="text-base font-semibold text-slate-900">What if…?</h3>
-      <p className="text-xs text-slate-500">
-        Re-run the full model on modified inputs to see how suitability moves. This is a
+      <h3 className="text-base font-semibold text-ink">What if…?</h3>
+      <p className="mt-1 text-xs text-ink-faint">
+        Re-run the full model on tweaked inputs to see how suitability moves. This is a
         fresh recommendation, not a manual tweak of the current one.
       </p>
       <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-3">
@@ -103,8 +103,8 @@ function ScenarioResult({
   const b = base.selected_candidate;
   const s = scenario.selected_candidate;
   return (
-    <div className="mt-4 rounded-xl border border-brand/20 border-l-4 border-l-brand bg-gradient-to-br from-white to-blue-50 p-4">
-      <div className="text-sm font-semibold text-slate-800">How suitability moved</div>
+    <div className="mt-4 rounded-md border border-brand/25 bg-brand-tint p-4">
+      <div className="text-sm font-semibold text-ink">How suitability moved</div>
       {base.status === "RECOMMENDED" && scenario.status === "RECOMMENDED" && b && s ? (
         <div className="mt-2 grid grid-cols-1 gap-2 text-sm sm:grid-cols-2">
           <Row
@@ -120,7 +120,7 @@ function ScenarioResult({
           />
         </div>
       ) : (
-        <p className="mt-2 text-sm text-slate-600">
+        <p className="mt-2 text-sm text-ink-soft">
           With those inputs the result is{" "}
           <span className="font-semibold">{scenario.status}</span>.
         </p>
@@ -146,16 +146,16 @@ function Row({
   delta?: number | null;
 }) {
   return (
-    <div className="rounded-md border border-slate-200 bg-white p-3">
-      <div className="text-xs uppercase tracking-wide text-slate-500">{label}</div>
-      <div className="mt-1 text-sm font-medium">{text}</div>
+    <div className="rounded-md border border-paper-line bg-white p-3">
+      <div className="text-xs text-ink-faint">{label}</div>
+      <div className="mt-1 text-sm font-medium text-ink">{text}</div>
       <div className="mt-1 flex items-center gap-2 text-sm">
-        <span className="font-semibold text-brand">
+        <span className="font-semibold text-brand-dark">
           {score == null ? "n/a" : `${(score * 100).toFixed(1)}%`}
         </span>
         {delta != null ? (
           <span
-            className={`text-xs ${delta > 0 ? "text-emerald-600" : delta < 0 ? "text-red-600" : "text-slate-400"}`}
+            className={`text-xs ${delta > 0 ? "text-brand-dark" : delta < 0 ? "text-red-600" : "text-ink-faint"}`}
           >
             {delta > 0 ? "▲" : delta < 0 ? "▼" : "•"} {Math.abs(delta * 100).toFixed(1)}%
           </span>

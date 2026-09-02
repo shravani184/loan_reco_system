@@ -42,17 +42,17 @@ export default function ExplanationPanel({
 
   return (
     <div className="card card-pad card-accent">
-      <h3 className="text-base font-semibold text-slate-900">Why this loan</h3>
+      <h3 className="text-base font-semibold text-ink">Why this loan</h3>
       {loading ? (
         <LoadingPanel label="Building your explanation…" />
       ) : error ? (
         <ErrorPanel message={error} />
       ) : data ? (
         <div className="mt-3 space-y-4">
-          <p className="text-sm leading-relaxed text-slate-700">{data.explanation.text}</p>
-          <div className="text-xs text-slate-500">
+          <p className="text-sm leading-relaxed text-ink-soft">{data.explanation.text}</p>
+          <div className="text-xs text-ink-faint">
             Explanation:{" "}
-            <span className="font-medium">
+            <span className="font-medium text-ink-soft">
               {data.explanation.source}{" "}
               {data.explanation.degraded_reason ? `(${data.explanation.degraded_reason})` : ""}
             </span>
@@ -99,25 +99,25 @@ function FactorGroup({
   const maxAbs = Math.max(...items.map((i) => Math.abs(i.contribution)), 0.0001);
   return (
     <div>
-      <div className="text-xs font-semibold uppercase tracking-wide text-slate-500">{title}</div>
+      <div className="text-sm font-semibold text-ink">{title}</div>
       <ul className="mt-2 space-y-1.5">
         {items.map((c) => (
           <li key={c.feature} className="text-sm">
             <div className="flex items-center justify-between gap-3">
-              <span className="truncate text-slate-700">{prettyFeature(c.feature)}</span>
+              <span className="truncate text-ink-soft">{prettyFeature(c.feature)}</span>
               <span
                 className={`shrink-0 font-mono text-xs font-medium ${
-                  tone === "good" ? "text-emerald-700" : "text-red-600"
+                  tone === "good" ? "text-brand-dark" : "text-red-600"
                 }`}
               >
                 {sign(c.contribution)}
                 {c.contribution.toFixed(3)}
               </span>
             </div>
-            <div className="mt-1 h-1.5 w-full overflow-hidden rounded-full bg-slate-100">
+            <div className="mt-1 h-1.5 w-full overflow-hidden rounded-full bg-paper">
               <div
                 className={`h-full rounded-full ${
-                  tone === "good" ? "bg-emerald-400" : "bg-red-400"
+                  tone === "good" ? "bg-brand" : "bg-red-400"
                 }`}
                 style={{ width: `${(Math.abs(c.contribution) / maxAbs) * 100}%` }}
               />

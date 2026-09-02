@@ -10,10 +10,10 @@ export default function BlockedCallout({ blocked }: { blocked?: BlockedTopChoice
   const c = blocked.candidate;
 
   return (
-    <div className="rounded-lg border-2 border-amber-300 bg-amber-50 p-5 shadow-sm">
+    <div className="rounded-md border border-amber-200 bg-amber-50 p-5">
       <div className="flex items-start gap-3">
         <svg
-          className="mt-0.5 h-6 w-6 shrink-0 text-amber-600"
+          className="mt-0.5 h-5 w-5 shrink-0 text-amber-600"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
@@ -27,11 +27,11 @@ export default function BlockedCallout({ blocked }: { blocked?: BlockedTopChoice
           />
         </svg>
         <div className="flex-1">
-          <div className="text-sm font-bold text-amber-800">
+          <div className="text-sm font-bold text-amber-900">
             The model's best match for you was adjusted by a safety rule
           </div>
-          <div className="mt-2 text-sm leading-relaxed text-slate-800">
-            <span className="font-semibold">{candidateTitle(c)}</span>{" "}
+          <div className="mt-2 text-sm leading-relaxed text-ink-soft">
+            <span className="font-semibold text-ink">{candidateTitle(c)}</span>{" "}
             ({rupees(c.loan_amount)} · {yearsMonths(c.tenure_months)} ·{" "}
             {strategyHuman(c.strategy)}) was your model's top pick with suitability{" "}
             <span className="font-semibold">

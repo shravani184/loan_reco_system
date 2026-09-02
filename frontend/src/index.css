@@ -3,49 +3,63 @@
 @tailwind utilities;
 
 body {
-  @apply text-slate-900 antialiased;
-  background-color: #eef4ff;
-  background-image: radial-gradient(
-      1000px 500px at 12% -10%,
-      rgba(59, 130, 246, 0.18),
-      transparent 60%
-    ),
-    radial-gradient(
-      800px 420px at 95% 4%,
-      rgba(30, 58, 138, 0.12),
-      transparent 55%
-    ),
-    linear-gradient(to bottom, #e8f1ff 0%, #eef4ff 260px, #f4f8ff 100%);
+  @apply text-ink antialiased;
+  background-color: #faf7f3;
+  background-image: linear-gradient(
+    to bottom,
+    #fdfbf8 0%,
+    #f7f2ec 100%
+  );
   background-attachment: fixed;
 }
 
 .field-label {
-  @apply block text-sm font-medium text-slate-700 mb-1.5;
+  @apply block text-sm font-medium text-ink-soft mb-1.5;
 }
 
 .field-input {
-  @apply w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm text-slate-900
-    shadow-sm transition
-    focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/30;
+  @apply w-full rounded-md border border-paper-line bg-white
+  px-3 py-2.5 text-sm text-ink
+  shadow-sm transition
+  focus:border-brand
+  focus:outline-none
+  focus:ring-2 focus:ring-brand/20;
 }
 
 .btn-primary {
-  @apply inline-flex items-center justify-center gap-2 rounded-lg bg-gradient-to-b from-brand to-brand-dark
-    px-5 py-2.5 text-sm font-semibold text-white shadow-md shadow-brand/25
-    transition hover:shadow-lg hover:shadow-brand/30 hover:brightness-110 active:scale-[0.98]
-    focus:outline-none focus:ring-2 focus:ring-brand-light focus:ring-offset-2 disabled:opacity-50
-    disabled:pointer-events-none;
+  @apply inline-flex items-center justify-center gap-2
+  rounded-md bg-brand
+  px-5 py-2.5 text-sm font-semibold text-white
+  shadow-sm
+  transition
+  hover:bg-brand-dark
+  active:scale-[0.98]
+  focus:outline-none
+  focus:ring-2 focus:ring-brand/20
+  focus:ring-offset-2
+  disabled:opacity-50
+  disabled:pointer-events-none;
 }
 
 .btn-secondary {
-  @apply inline-flex items-center justify-center rounded-lg border border-slate-300
-    bg-white px-4 py-2.5 text-sm font-medium text-slate-700 shadow-sm
-    transition hover:bg-slate-50 hover:border-slate-400 active:scale-[0.98]
-    focus:outline-none focus:ring-2 focus:ring-brand-light focus:ring-offset-2;
+  @apply inline-flex items-center justify-center
+  rounded-md border border-paper-line
+  bg-white
+  px-4 py-2.5 text-sm font-medium text-ink-soft
+  shadow-sm
+  transition
+  hover:border-ink-faint/40 hover:text-ink
+  active:scale-[0.98]
+  focus:outline-none
+  focus:ring-2 focus:ring-brand/20
+  focus:ring-offset-2;
 }
 
 .card {
-  @apply rounded-xl border border-slate-200/80 bg-white shadow-sm shadow-slate-200/50;
+  @apply rounded-lg
+  border border-paper-line
+  bg-white
+  shadow-soft;
 }
 
 .card-pad {
@@ -53,13 +67,13 @@ body {
 }
 
 .card-accent {
-  @apply border-t-4 border-t-brand;
+  @apply border-t-2 border-t-brand;
 }
 
 .section-heading {
-  @apply text-lg font-bold text-slate-900;
+  @apply text-lg font-semibold text-ink;
 }
 
 .section-sub {
-  @apply mt-1 text-sm text-slate-500;
+  @apply mt-1 text-sm text-ink-faint;
 }

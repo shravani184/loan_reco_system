@@ -15,20 +15,20 @@ const TITLES: Record<string, string> = {
 export default function NoLoanResult({ result }: { result: Recommendation }) {
   return (
     <div className="space-y-6">
-      <div className="rounded-2xl border border-slate-200 bg-gradient-to-br from-white to-blue-50 p-6 shadow-sm">
+      <div className="rounded-lg border border-paper-line bg-brand-tint p-6">
         <div className="flex items-start gap-3">
-          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-slate-100 text-slate-600">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-brand/10 text-brand-dark">
             <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <path d="M12 9v3.75m0 3.25h.008v.008H12V16z" />
               <circle cx="12" cy="12" r="9" />
             </svg>
           </div>
           <div>
-            <h3 className="text-lg font-bold text-slate-900">
+            <h3 className="text-lg font-bold text-ink">
               {TITLES[result.status] ?? result.status}
             </h3>
-            <p className="mt-1 text-sm text-slate-600">
-              We looked through every option in the catalogue. Here is how far your request
+            <p className="mt-1 text-sm text-ink-soft">
+              We went through every option in the catalogue. Here's how far your request
               got, and why nothing was recommended.
             </p>
           </div>
@@ -41,7 +41,7 @@ export default function NoLoanResult({ result }: { result: Recommendation }) {
 
       {result.mismatch_reasons.length ? (
         <div className="card card-pad">
-          <h4 className="text-base font-semibold text-slate-900">Why no loan was recommended</h4>
+          <h4 className="text-base font-semibold text-ink">Why no loan was recommended</h4>
           <ul className="mt-3 space-y-2">
             {result.mismatch_reasons.map((reason, i) => (
               <MismatchLine key={i} reason={reason} />
@@ -57,9 +57,9 @@ export default function NoLoanResult({ result }: { result: Recommendation }) {
 
 function MismatchLine({ reason }: { reason: MismatchReason }) {
   return (
-    <li className="flex items-start gap-2 rounded-md bg-slate-50 px-3 py-2 text-sm">
-      <span className="mt-0.5 text-slate-400">·</span>
-      <span className="text-slate-700">
+    <li className="flex items-start gap-2 rounded-md bg-paper px-3 py-2 text-sm">
+      <span className="mt-0.5 text-ink-faint">·</span>
+      <span className="text-ink-soft">
         {reading(reason)}
       </span>
     </li>
@@ -131,23 +131,23 @@ function OutcomeAdvice({ result }: { result: Recommendation }) {
 
   if (!suggestions.length) {
     return (
-      <div className="card card-pad border-l-4 border-l-slate-400">
-        <h5 className="text-sm font-semibold text-slate-900">What would change the outcome</h5>
-        <p className="mt-1 text-sm text-slate-600">
-          None of the present reasons points to a single change. Adjusting your profile
-          and re-running may surface a suitable option.
+      <div className="card card-pad border-l-2 border-l-ink-faint">
+        <h5 className="text-sm font-semibold text-ink">What would change the outcome</h5>
+        <p className="mt-1 text-sm text-ink-soft">
+          None of the reasons here points to a single change. Adjusting your details and
+          re-running may surface a suitable option.
         </p>
       </div>
     );
   }
 
   return (
-    <div className="card card-pad border-l-4 border-l-brand">
-      <h5 className="text-sm font-semibold text-slate-900">What would change the outcome</h5>
-      <ul className="mt-2 space-y-1.5 text-sm text-slate-700">
+    <div className="card card-pad border-l-2 border-l-brand">
+      <h5 className="text-sm font-semibold text-ink">What would change the outcome</h5>
+      <ul className="mt-2 space-y-1.5 text-sm text-ink-soft">
         {suggestions.map((s, i) => (
           <li key={i} className="flex items-start gap-2">
-            <span className="mt-0.5 text-emerald-600">→</span>
+            <span className="mt-0.5 text-brand">→</span>
             {s.charAt(0).toUpperCase() + s.slice(1)}.
           </li>
         ))}

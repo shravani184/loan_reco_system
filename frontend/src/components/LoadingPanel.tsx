@@ -1,27 +1,8 @@
 export default function LoadingPanel({ label = "Loading…" }: { label?: string }) {
   return (
-    <div className="flex items-center justify-center gap-3 rounded-lg border border-slate-200 bg-white p-10 shadow-sm">
-      <svg
-        className="h-5 w-5 animate-spin text-brand"
-        viewBox="0 0 24 24"
-        fill="none"
-        aria-hidden="true"
-      >
-        <circle
-          className="opacity-25"
-          cx="12"
-          cy="12"
-          r="10"
-          stroke="currentColor"
-          strokeWidth="4"
-        />
-        <path
-          className="opacity-75"
-          fill="currentColor"
-          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
-        />
-      </svg>
-      <span className="text-sm text-slate-600">{label}</span>
+    <div className="flex items-center justify-center gap-3 rounded-md border border-paper-line bg-white p-10 shadow-soft">
+      <span className="h-5 w-5 animate-spin rounded-full border-2 border-paper-line border-t-brand" aria-hidden="true" />
+      <span className="text-sm text-ink-soft">{label}</span>
     </div>
   );
 }

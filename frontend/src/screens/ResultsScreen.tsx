@@ -37,17 +37,17 @@ export default function ResultsScreen({
 
   return (
     <div className="space-y-6">
-      <div className="rounded-2xl bg-gradient-to-r from-brand to-brand-dark px-6 py-5 text-white shadow-lg shadow-brand/25">
+      <div className="rounded-lg border border-paper-line bg-white px-6 py-5 shadow-soft">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div className="flex items-center gap-3">
-            <h2 className="text-xl font-bold">Your recommendation</h2>
+            <h2 className="text-xl font-bold text-ink">Your recommendation</h2>
             <SourceBadge source={result.source} />
           </div>
           <button
-            className="inline-flex items-center gap-2 rounded-lg bg-white/15 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/25 focus:outline-none focus:ring-2 focus:ring-white/40"
+            className="inline-flex items-center gap-2 rounded-md border border-paper-line bg-white px-4 py-2 text-sm font-semibold text-ink-soft transition hover:border-ink-faint/40 hover:text-ink"
             onClick={onEdit}
           >
-            Edit my details
+            Change my details
           </button>
         </div>
       </div>
@@ -56,9 +56,9 @@ export default function ResultsScreen({
 
       {result.source === "DETERMINISTIC_FALLBACK" ? (
         <p className="text-xs text-amber-700">
-          This result was produced by the deterministic fallback because the{" "}
-          recommendation model is unavailable. Suitability scores are not shown, since
-          only the model computes them.
+          This result was produced by the fallback because the recommendation model is
+          unavailable. Suitability scores are not shown, since only the model computes
+          them.
         </p>
       ) : null}
 
@@ -92,10 +92,9 @@ function renderStatus(result: Recommendation, request: RecommendRequest) {
 
 function Footer() {
   return (
-    <footer className="mt-2 border-t border-slate-200 pt-4 text-xs text-slate-500">
-      This is an illustrative recommendation tool, not financial advice, a credit
-      decision, or an offer of credit. Eligibility and suitability are modelled on
-      synthetic data and your self-entered details.
+    <footer className="mt-2 border-t border-paper-line pt-4 text-xs text-ink-faint">
+      This is an illustrative tool, not financial advice, a credit decision, or an offer
+      of credit. It runs on synthetic data and the details you enter.
     </footer>
   );
 }

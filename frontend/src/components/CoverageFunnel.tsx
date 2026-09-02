@@ -34,25 +34,23 @@ export default function CoverageFunnel({ coverage }: { coverage: CatalogueCovera
 
   return (
     <div className="w-full min-w-0 overflow-hidden">
-      <div className="text-xs font-semibold uppercase tracking-wide text-slate-500">
-        Catalogue coverage
-      </div>
+      <div className="text-sm font-semibold text-ink">How the options narrowed down</div>
       <div className="mt-2 space-y-1.5">
         {steps.map((s) => {
           const width = Math.max(4, Math.min(100, (s.value / maxStep) * 100));
           return (
             <div key={s.key} className="flex items-center gap-2">
-              <div className="w-40 shrink-0 text-right text-xs text-slate-500">
+              <div className="w-40 shrink-0 text-right text-xs text-ink-faint">
                 {s.label}
               </div>
-              <div className="h-4 flex-1 rounded-full bg-slate-100">
+              <div className="h-4 flex-1 rounded-full bg-paper">
                 <div
-                  className="flex h-full items-center rounded-full bg-gradient-to-r from-brand-light to-brand px-1 transition-all"
+                  className="flex h-full items-center rounded-full bg-brand px-1 transition-all"
                   style={{ width: `${width}%` }}
                 />
               </div>
               <div className="flex w-8 shrink-0 justify-end">
-                <span className="inline-flex min-w-6 items-center justify-center rounded-full bg-brand/10 px-1.5 py-0.5 text-xs font-bold text-brand">
+                <span className="inline-flex min-w-6 items-center justify-center rounded-md bg-brand-tint px-1.5 py-0.5 text-xs font-semibold text-brand-dark">
                   {s.value}
                 </span>
               </div>
