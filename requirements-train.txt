@@ -1,0 +1,19 @@
+# OFFLINE / TRAINING dependencies.
+#
+# Installed for training/ and for the test suite. Never installed on the serving
+# target, and never imported by anything under app/.
+#
+# Includes the serving set so a single environment can run both.
+
+-r requirements.txt
+
+pandas==3.0.1
+scikit-learn==1.7.2
+shap==0.52.0
+matplotlib==3.10.9
+hypothesis==6.167.1
+
+# Operational measurement only (scripts/measure_memory.py). NOT a serving dependency:
+# the memory probe runs beside the service, never inside it.
+psutil==7.1.0
+pytest==9.1.1

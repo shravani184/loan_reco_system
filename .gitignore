@@ -1,0 +1,33 @@
+# Secrets
+.env
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.hypothesis/
+*.egg-info/
+.venv/
+venv/
+
+# Databases (personalization store)
+*.db
+*.sqlite
+*.sqlite3
+
+# Frontend
+node_modules/
+dist/
+build/
+
+# Generated data and model artifacts
+data/*
+!data/.gitkeep
+models/*
+!models/.gitkeep
+
+# Spike scratch output. spikes/*/FINDINGS.md, the corpora and measurements.json are
+# Phase R deliverables and ARE committed.
+spikes/**/*.log
+spikes/**/__pycache__/

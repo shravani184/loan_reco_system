@@ -1,0 +1,17 @@
+# SERVING dependencies only.
+#
+# This file is the memory budget (CONTEXT.md 17.2, AGENTS.md 14). Phase R measured
+# this set at 186.3 MB resident vs 310.7 MB with pandas + scikit-learn + shap added.
+# pandas, scikit-learn, shap and matplotlib are TRAINING-ONLY and belong in
+# requirements-train.txt. Adding one of them here is a defect, and
+# tests/test_serving_imports.py fails if app/ ever imports one.
+#
+# Every pin is exact (==). Ranges are not permitted.
+
+fastapi==0.118.0
+pydantic==2.11.10
+pydantic-settings==2.14.2
+uvicorn==0.37.0
+numpy==2.3.3
+xgboost==3.4.1
+httpx==0.28.1

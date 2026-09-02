@@ -1,0 +1,35 @@
+{
+  "serving": {
+    "baseline_mb": 12.0,
+    "after_import_mb": 177.9,
+    "after_model_load_mb": 186.2,
+    "after_predict_mb": 186.3,
+    "peak_mb": 189.2
+  },
+  "full": {
+    "baseline_mb": 12.1,
+    "after_import_mb": 302.6,
+    "after_model_load_mb": 310.6,
+    "after_predict_mb": 310.7,
+    "peak_mb": 313.5
+  },
+  "saving_mb": 124.39999999999998,
+  "isotonic": {
+    "knots": 32,
+    "max_abs_diff": 0.0,
+    "monotone": true,
+    "in_unit_interval": true
+  },
+  "isotonic_verified": true,
+  "pred_contribs": {
+    "shape": [
+      50,
+      13
+    ],
+    "features_plus_bias": 13,
+    "max_abs_reconstruction_error": 2.86102294921875e-06,
+    "shap_package_needed": false
+  },
+  "pred_contribs_verified": true,
+  "recommended_ceiling_mb": 290
+}
