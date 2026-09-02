@@ -1,0 +1,740 @@
+{
+  "model_version": "recommender-2.0.0",
+  "model_role": "PRIMARY. Its ordering IS the recommendation. Nothing downstream reorders it; deterministic code may only mark a candidate failed and move on.",
+  "relevance_labels_are_synthetic": true,
+  "relevance_label_source": "training/labeling.py",
+  "reporting_note": "These metrics measure agreement with the synthetic labeling policy, not real recommendation quality. Agreement between this model and the diagnostic-utility baseline is not evidence either is correct: they share ancestry through the labeling policy.",
+  "objective": "rank:ndcg",
+  "feature_version": "2.0.0",
+  "config_version": "2.0.0",
+  "labeling_policy_version": "2.0.0",
+  "risk_model_version": "risk-2.0.0",
+  "feature_columns": [
+    "credit_score",
+    "age",
+    "dependents",
+    "employment_type",
+    "employment_years",
+    "monthly_income",
+    "monthly_expenses",
+    "existing_emi",
+    "disposable_income",
+    "debt_burden_ratio",
+    "expense_ratio",
+    "emi_affordability_ceiling",
+    "income_stability_score",
+    "financial_health",
+    "has_portfolio",
+    "portfolio_total_value",
+    "portfolio_liquid_value",
+    "liquidity_ratio",
+    "equity_exposure",
+    "debt_exposure",
+    "crypto_exposure",
+    "concentration_risk",
+    "unrealized_gain_loss",
+    "portfolio_risk",
+    "is_cold_start",
+    "purpose_affinity",
+    "strategy_affinity",
+    "tenure_band_affinity",
+    "session_count",
+    "engagement_score",
+    "prior_declines",
+    "loan_purpose",
+    "requested_amount",
+    "preferred_tenure_months",
+    "risk_appetite",
+    "is_no_loan",
+    "product_lender",
+    "product_primary_purpose",
+    "product_annual_rate",
+    "product_min_amount",
+    "product_max_amount",
+    "product_min_tenure_months",
+    "product_max_tenure_months",
+    "product_min_credit_score",
+    "product_min_monthly_income",
+    "product_processing_fee_pct",
+    "financing_strategy",
+    "candidate_tenure_months",
+    "loan_amount",
+    "emi",
+    "loan_to_annual_income",
+    "emi_to_income",
+    "emi_to_disposable_income",
+    "total_interest",
+    "total_repayment",
+    "interest_to_loan_amount",
+    "post_loan_debt_burden",
+    "affordability_headroom",
+    "affordability_headroom_ratio",
+    "liquidation_amount",
+    "liquidation_to_portfolio",
+    "volatile_liquidation_amount",
+    "volatile_liquidation_to_portfolio",
+    "remaining_portfolio_value",
+    "post_strategy_liquidity_ratio",
+    "tenure_delta_vs_preferred",
+    "amount_delta_vs_requested",
+    "funding_coverage",
+    "risk_pd"
+  ],
+  "feature_manifest": {
+    "feature_version": "2.0.0",
+    "risk_feature_columns": [
+      "credit_score",
+      "age",
+      "dependents",
+      "employment_type",
+      "employment_years",
+      "monthly_income",
+      "monthly_expenses",
+      "existing_emi",
+      "disposable_income",
+      "debt_burden_ratio",
+      "expense_ratio",
+      "emi_affordability_ceiling",
+      "income_stability_score",
+      "financial_health",
+      "has_portfolio",
+      "portfolio_total_value",
+      "portfolio_liquid_value",
+      "liquidity_ratio",
+      "equity_exposure",
+      "debt_exposure",
+      "crypto_exposure",
+      "concentration_risk",
+      "unrealized_gain_loss",
+      "portfolio_risk",
+      "loan_purpose",
+      "requested_amount",
+      "preferred_tenure_months",
+      "risk_appetite",
+      "requested_to_annual_income",
+      "portfolio_to_requested"
+    ],
+    "pair_feature_columns": [
+      "credit_score",
+      "age",
+      "dependents",
+      "employment_type",
+      "employment_years",
+      "monthly_income",
+      "monthly_expenses",
+      "existing_emi",
+      "disposable_income",
+      "debt_burden_ratio",
+      "expense_ratio",
+      "emi_affordability_ceiling",
+      "income_stability_score",
+      "financial_health",
+      "has_portfolio",
+      "portfolio_total_value",
+      "portfolio_liquid_value",
+      "liquidity_ratio",
+      "equity_exposure",
+      "debt_exposure",
+      "crypto_exposure",
+      "concentration_risk",
+      "unrealized_gain_loss",
+      "portfolio_risk",
+      "is_cold_start",
+      "purpose_affinity",
+      "strategy_affinity",
+      "tenure_band_affinity",
+      "session_count",
+      "engagement_score",
+      "prior_declines",
+      "loan_purpose",
+      "requested_amount",
+      "preferred_tenure_months",
+      "risk_appetite",
+      "is_no_loan",
+      "product_lender",
+      "product_primary_purpose",
+      "product_annual_rate",
+      "product_min_amount",
+      "product_max_amount",
+      "product_min_tenure_months",
+      "product_max_tenure_months",
+      "product_min_credit_score",
+      "product_min_monthly_income",
+      "product_processing_fee_pct",
+      "financing_strategy",
+      "candidate_tenure_months",
+      "loan_amount",
+      "emi",
+      "loan_to_annual_income",
+      "emi_to_income",
+      "emi_to_disposable_income",
+      "total_interest",
+      "total_repayment",
+      "interest_to_loan_amount",
+      "post_loan_debt_burden",
+      "affordability_headroom",
+      "affordability_headroom_ratio",
+      "liquidation_amount",
+      "liquidation_to_portfolio",
+      "volatile_liquidation_amount",
+      "volatile_liquidation_to_portfolio",
+      "remaining_portfolio_value",
+      "post_strategy_liquidity_ratio",
+      "tenure_delta_vs_preferred",
+      "amount_delta_vs_requested",
+      "funding_coverage",
+      "risk_pd"
+    ],
+    "enum_encodings": {
+      "loan_purpose": {
+        "HOME": 0,
+        "VEHICLE": 1,
+        "EDUCATION": 2,
+        "PERSONAL": 3,
+        "BUSINESS": 4,
+        "MEDICAL": 5
+      },
+      "employment_type": {
+        "SALARIED": 0,
+        "SELF_EMPLOYED": 1,
+        "CONTRACT": 2,
+        "RETIRED": 3
+      },
+      "financing_strategy": {
+        "BORROW_100": 0,
+        "BORROW_80_LIQUIDATE_20": 1,
+        "BORROW_60_LIQUIDATE_40": 2,
+        "BORROW_40_LIQUIDATE_60": 3,
+        "BORROW_20_LIQUIDATE_80": 4,
+        "LIQUIDATE_100": 5
+      },
+      "financial_health": {
+        "EXCELLENT": 0,
+        "GOOD": 1,
+        "FAIR": 2,
+        "POOR": 3
+      },
+      "portfolio_risk": {
+        "CONSERVATIVE": 0,
+        "BALANCED": 1,
+        "GROWTH": 2,
+        "AGGRESSIVE": 3
+      },
+      "risk_appetite": {
+        "CONSERVATIVE": 0,
+        "MODERATE": 1,
+        "AGGRESSIVE": 2
+      }
+    },
+    "lender_encoding": {
+      "Anvil Credit": 0,
+      "Cobalt Money": 1,
+      "Harbourline Finance": 2,
+      "Ironvale Capital": 3,
+      "Kestrel Housing Finance": 4,
+      "Meridian Bank": 5,
+      "Sundial Credit Union": 6
+    },
+    "unseen_category": -1
+  },
+  "seed": 20260907,
+  "fit_groups": 102,
+  "calibration_groups": 34,
+  "test_groups": 34,
+  "total_rows": 5808,
+  "split_source": "phase-7 customer split; calibration carved from train by customer",
+  "searched_grid": [
+    {
+      "max_depth": 3,
+      "learning_rate": 0.05,
+      "n_estimators": 200
+    },
+    {
+      "max_depth": 3,
+      "learning_rate": 0.05,
+      "n_estimators": 400
+    },
+    {
+      "max_depth": 3,
+      "learning_rate": 0.1,
+      "n_estimators": 200
+    },
+    {
+      "max_depth": 3,
+      "learning_rate": 0.1,
+      "n_estimators": 400
+    },
+    {
+      "max_depth": 4,
+      "learning_rate": 0.05,
+      "n_estimators": 200
+    },
+    {
+      "max_depth": 4,
+      "learning_rate": 0.05,
+      "n_estimators": 400
+    },
+    {
+      "max_depth": 4,
+      "learning_rate": 0.1,
+      "n_estimators": 200
+    },
+    {
+      "max_depth": 4,
+      "learning_rate": 0.1,
+      "n_estimators": 400
+    },
+    {
+      "max_depth": 6,
+      "learning_rate": 0.05,
+      "n_estimators": 200
+    },
+    {
+      "max_depth": 6,
+      "learning_rate": 0.05,
+      "n_estimators": 400
+    },
+    {
+      "max_depth": 6,
+      "learning_rate": 0.1,
+      "n_estimators": 200
+    },
+    {
+      "max_depth": 6,
+      "learning_rate": 0.1,
+      "n_estimators": 400
+    }
+  ],
+  "cv_folds": 4,
+  "cv_group_aware": true,
+  "cv_results": [
+    {
+      "params": {
+        "max_depth": 3,
+        "learning_rate": 0.05,
+        "n_estimators": 200
+      },
+      "cv_ndcg@5": 0.9223
+    },
+    {
+      "params": {
+        "max_depth": 3,
+        "learning_rate": 0.05,
+        "n_estimators": 400
+      },
+      "cv_ndcg@5": 0.9284
+    },
+    {
+      "params": {
+        "max_depth": 3,
+        "learning_rate": 0.1,
+        "n_estimators": 200
+      },
+      "cv_ndcg@5": 0.9283
+    },
+    {
+      "params": {
+        "max_depth": 3,
+        "learning_rate": 0.1,
+        "n_estimators": 400
+      },
+      "cv_ndcg@5": 0.9363
+    },
+    {
+      "params": {
+        "max_depth": 4,
+        "learning_rate": 0.05,
+        "n_estimators": 200
+      },
+      "cv_ndcg@5": 0.9179
+    },
+    {
+      "params": {
+        "max_depth": 4,
+        "learning_rate": 0.05,
+        "n_estimators": 400
+      },
+      "cv_ndcg@5": 0.9237
+    },
+    {
+      "params": {
+        "max_depth": 4,
+        "learning_rate": 0.1,
+        "n_estimators": 200
+      },
+      "cv_ndcg@5": 0.9254
+    },
+    {
+      "params": {
+        "max_depth": 4,
+        "learning_rate": 0.1,
+        "n_estimators": 400
+      },
+      "cv_ndcg@5": 0.9225
+    },
+    {
+      "params": {
+        "max_depth": 6,
+        "learning_rate": 0.05,
+        "n_estimators": 200
+      },
+      "cv_ndcg@5": 0.9171
+    },
+    {
+      "params": {
+        "max_depth": 6,
+        "learning_rate": 0.05,
+        "n_estimators": 400
+      },
+      "cv_ndcg@5": 0.9204
+    },
+    {
+      "params": {
+        "max_depth": 6,
+        "learning_rate": 0.1,
+        "n_estimators": 200
+      },
+      "cv_ndcg@5": 0.9171
+    },
+    {
+      "params": {
+        "max_depth": 6,
+        "learning_rate": 0.1,
+        "n_estimators": 400
+      },
+      "cv_ndcg@5": 0.9198
+    }
+  ],
+  "cv_best_ndcg@5": 0.9363,
+  "best_params": {
+    "max_depth": 3,
+    "learning_rate": 0.1,
+    "n_estimators": 400
+  },
+  "test_metrics": {
+    "ndcg@1": 0.9435,
+    "ndcg@3": 0.9072,
+    "ndcg@5": 0.8944,
+    "precision@1": 0.8235,
+    "precision@3": 0.7745,
+    "recall@5": 0.4705,
+    "map@5": 0.872,
+    "mrr": 0.9828,
+    "kendall_tau": 0.689,
+    "groups_scored": 34,
+    "groups_contributing_ndcg@5": 32
+  },
+  "baselines": {
+    "random": {
+      "ndcg@1": 0.2693,
+      "ndcg@3": 0.3171,
+      "ndcg@5": 0.3368,
+      "precision@1": 0.2353,
+      "precision@3": 0.3333,
+      "recall@5": 0.1827,
+      "map@5": 0.2063,
+      "mrr": 0.5483,
+      "kendall_tau": 0.0023,
+      "groups_scored": 34,
+      "groups_contributing_ndcg@5": 32
+    },
+    "cheapest_emi": {
+      "ndcg@1": 0.6935,
+      "ndcg@3": 0.5968,
+      "ndcg@5": 0.5932,
+      "precision@1": 0.5882,
+      "precision@3": 0.5098,
+      "recall@5": 0.3059,
+      "map@5": 0.534,
+      "mrr": 0.7593,
+      "kendall_tau": 0.3489,
+      "groups_scored": 34,
+      "groups_contributing_ndcg@5": 32
+    },
+    "diagnostic_utility": {
+      "ndcg@1": 0.7202,
+      "ndcg@3": 0.6179,
+      "ndcg@5": 0.5892,
+      "precision@1": 0.6176,
+      "precision@3": 0.5196,
+      "recall@5": 0.2842,
+      "map@5": 0.5487,
+      "mrr": 0.7692,
+      "kendall_tau": 0.3162,
+      "groups_scored": 34,
+      "groups_contributing_ndcg@5": 32
+    }
+  },
+  "policy_oracle_ceiling": {
+    "ndcg@1": 0.9821,
+    "ndcg@3": 0.9753,
+    "ndcg@5": 0.9769,
+    "precision@1": 0.8529,
+    "precision@3": 0.8333,
+    "recall@5": 0.5079,
+    "map@5": 0.9566,
+    "mrr": 1.0,
+    "kendall_tau": 0.8055,
+    "groups_scored": 34,
+    "groups_contributing_ndcg@5": 32
+  },
+  "policy_oracle_note": "The labeling policy's own combined score, evaluated against the noised labels. It is the ceiling a model recovering the policy perfectly would reach, not a baseline to beat. A model above it would indicate leakage.",
+  "beats_diagnostic_utility_on_ndcg@5": true,
+  "calibration": {
+    "method": "isotonic regression on held-out groups, exported as monotone knots",
+    "applied_with": "numpy.interp",
+    "target": "P(relevance >= 2)",
+    "knots_x": [
+      -7.877843,
+      -4.001274,
+      -3.994789,
+      -3.215384,
+      -3.207587,
+      -2.375376,
+      -2.374545,
+      -2.238794,
+      -2.238375,
+      -2.175411,
+      -2.174946,
+      -1.93708,
+      -1.932735,
+      -1.845823,
+      -1.841883,
+      -1.592398,
+      -1.583885,
+      -1.301038,
+      -1.29127,
+      -1.184013,
+      -1.180555,
+      -0.962282,
+      -0.956034,
+      -0.880799,
+      -0.86835,
+      -0.734701,
+      -0.72854,
+      -0.614189,
+      -0.599844,
+      -0.480194,
+      -0.479512,
+      0.01109,
+      0.016555,
+      0.201599,
+      0.202098,
+      0.663779,
+      0.666579,
+      0.687819,
+      0.692095,
+      1.057657,
+      1.064927,
+      1.529641,
+      1.563587,
+      2.693547,
+      2.741386,
+      5.82565,
+      5.859415,
+      6.73807
+    ],
+    "knots_y": [
+      0.0,
+      0.0,
+      0.031915,
+      0.031915,
+      0.058511,
+      0.058511,
+      0.058824,
+      0.058824,
+      0.071429,
+      0.071429,
+      0.130435,
+      0.130435,
+      0.166667,
+      0.166667,
+      0.222222,
+      0.222222,
+      0.245614,
+      0.245614,
+      0.25,
+      0.25,
+      0.272727,
+      0.272727,
+      0.3,
+      0.3,
+      0.380952,
+      0.380952,
+      0.5,
+      0.5,
+      0.588235,
+      0.588235,
+      0.719298,
+      0.719298,
+      0.73913,
+      0.73913,
+      0.746032,
+      0.746032,
+      0.75,
+      0.75,
+      0.77551,
+      0.77551,
+      0.90625,
+      0.90625,
+      0.973684,
+      0.973684,
+      0.975806,
+      0.975806,
+      1.0,
+      1.0
+    ],
+    "knot_count": 48,
+    "knot_reproduction_max_diff": 0.0
+  },
+  "calibration_quality": {
+    "brier_score": 0.1163,
+    "reliability_curve": [
+      {
+        "bin_low": 0.0,
+        "bin_high": 0.1,
+        "count": 476,
+        "mean_predicted": 0.0327,
+        "observed_rate": 0.063
+      },
+      {
+        "bin_low": 0.1,
+        "bin_high": 0.2,
+        "count": 61,
+        "mean_predicted": 0.1408,
+        "observed_rate": 0.1475
+      },
+      {
+        "bin_low": 0.2,
+        "bin_high": 0.3,
+        "count": 148,
+        "mean_predicted": 0.2511,
+        "observed_rate": 0.2297
+      },
+      {
+        "bin_low": 0.3,
+        "bin_high": 0.4,
+        "count": 19,
+        "mean_predicted": 0.3809,
+        "observed_rate": 0.4737
+      },
+      {
+        "bin_low": 0.4,
+        "bin_high": 0.5,
+        "count": 1,
+        "mean_predicted": 0.4829,
+        "observed_rate": 0.0
+      },
+      {
+        "bin_low": 0.5,
+        "bin_high": 0.6,
+        "count": 33,
+        "mean_predicted": 0.5401,
+        "observed_rate": 0.4545
+      },
+      {
+        "bin_low": 0.6,
+        "bin_high": 0.7,
+        "count": 0,
+        "mean_predicted": null,
+        "observed_rate": null
+      },
+      {
+        "bin_low": 0.7,
+        "bin_high": 0.8,
+        "count": 163,
+        "mean_predicted": 0.7415,
+        "observed_rate": 0.6503
+      },
+      {
+        "bin_low": 0.8,
+        "bin_high": 0.9,
+        "count": 1,
+        "mean_predicted": 0.8554,
+        "observed_rate": 1.0
+      },
+      {
+        "bin_low": 0.9,
+        "bin_high": 1.0,
+        "count": 206,
+        "mean_predicted": 0.9645,
+        "observed_rate": 0.9175
+      }
+    ]
+  },
+  "threshold_recommendation": {
+    "recommended_threshold": 0.35,
+    "implied_no_suitable_loan_rate": 0.1471,
+    "label_based_no_good_option_rate": 0.1471,
+    "rationale": "the value whose implied NO_SUITABLE_LOAN rate on held-out groups is closest to the share of groups whose labels contain no candidate at relevance >= 2",
+    "sweep": [
+      {
+        "threshold": 0.3,
+        "no_suitable_loan_groups": 4,
+        "no_suitable_loan_rate": 0.1176
+      },
+      {
+        "threshold": 0.35,
+        "no_suitable_loan_groups": 5,
+        "no_suitable_loan_rate": 0.1471
+      },
+      {
+        "threshold": 0.4,
+        "no_suitable_loan_groups": 5,
+        "no_suitable_loan_rate": 0.1471
+      },
+      {
+        "threshold": 0.45,
+        "no_suitable_loan_groups": 5,
+        "no_suitable_loan_rate": 0.1471
+      },
+      {
+        "threshold": 0.5,
+        "no_suitable_loan_groups": 5,
+        "no_suitable_loan_rate": 0.1471
+      },
+      {
+        "threshold": 0.55,
+        "no_suitable_loan_groups": 6,
+        "no_suitable_loan_rate": 0.1765
+      },
+      {
+        "threshold": 0.6,
+        "no_suitable_loan_groups": 6,
+        "no_suitable_loan_rate": 0.1765
+      },
+      {
+        "threshold": 0.65,
+        "no_suitable_loan_groups": 6,
+        "no_suitable_loan_rate": 0.1765
+      },
+      {
+        "threshold": 0.7,
+        "no_suitable_loan_groups": 6,
+        "no_suitable_loan_rate": 0.1765
+      },
+      {
+        "threshold": 0.75,
+        "no_suitable_loan_groups": 7,
+        "no_suitable_loan_rate": 0.2059
+      },
+      {
+        "threshold": 0.8,
+        "no_suitable_loan_groups": 7,
+        "no_suitable_loan_rate": 0.2059
+      },
+      {
+        "threshold": 0.85,
+        "no_suitable_loan_groups": 7,
+        "no_suitable_loan_rate": 0.2059
+      },
+      {
+        "threshold": 0.9,
+        "no_suitable_loan_groups": 7,
+        "no_suitable_loan_rate": 0.2059
+      }
+    ],
+    "current_config_value": 0.55,
+    "note": "RECOMMENDATION ONLY \u2014 a human sets this in app/config.py."
+  }
+}

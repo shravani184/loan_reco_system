@@ -22,9 +22,7 @@ dist/
 build/
 
 # Generated data and model artifacts
-data/*
 !data/.gitkeep
-models/*
 !models/.gitkeep
 
 # Spike scratch output. spikes/*/FINDINGS.md, the corpora and measurements.json are

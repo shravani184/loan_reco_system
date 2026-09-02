@@ -1,0 +1,53 @@
+{
+  "lender_encoding": {
+    "Anvil Credit": 0,
+    "Cobalt Money": 1,
+    "Harbourline Finance": 2,
+    "Ironvale Capital": 3,
+    "Kestrel Housing Finance": 4,
+    "Meridian Bank": 5,
+    "Sundial Credit Union": 6
+  },
+  "enum_encodings": {
+    "loan_purpose": {
+      "HOME": 0,
+      "VEHICLE": 1,
+      "EDUCATION": 2,
+      "PERSONAL": 3,
+      "BUSINESS": 4,
+      "MEDICAL": 5
+    },
+    "employment_type": {
+      "SALARIED": 0,
+      "SELF_EMPLOYED": 1,
+      "CONTRACT": 2,
+      "RETIRED": 3
+    },
+    "financing_strategy": {
+      "BORROW_100": 0,
+      "BORROW_80_LIQUIDATE_20": 1,
+      "BORROW_60_LIQUIDATE_40": 2,
+      "BORROW_40_LIQUIDATE_60": 3,
+      "BORROW_20_LIQUIDATE_80": 4,
+      "LIQUIDATE_100": 5
+    },
+    "financial_health": {
+      "EXCELLENT": 0,
+      "GOOD": 1,
+      "FAIR": 2,
+      "POOR": 3
+    },
+    "portfolio_risk": {
+      "CONSERVATIVE": 0,
+      "BALANCED": 1,
+      "GROWTH": 2,
+      "AGGRESSIVE": 3
+    },
+    "risk_appetite": {
+      "CONSERVATIVE": 0,
+      "MODERATE": 1,
+      "AGGRESSIVE": 2
+    }
+  },
+  "unseen_category": -1
+}

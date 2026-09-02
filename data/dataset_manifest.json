@@ -1,0 +1,59 @@
+{
+  "labels_are_synthetic": true,
+  "labels_source": "training/labeling.py",
+  "note": "Relevance labels are produced by a documented synthetic policy, not observed from customers. Ranking metrics measure agreement with that policy, not real recommendation quality.",
+  "labeling_policy_version": "2.0.0",
+  "config_version": "2.0.0",
+  "generator_seed": 20260902,
+  "split_seed": 20260904,
+  "label_noise_seed": 20260903,
+  "label_noise_rate": 0.05,
+  "min_group_size": 2,
+  "rows": 5808,
+  "groups": 170,
+  "label_distribution": {
+    "0": 1958,
+    "1": 1723,
+    "2": 1401,
+    "3": 726
+  },
+  "split_rows": {
+    "train": 4700,
+    "test": 1108
+  },
+  "split_groups": {
+    "train": 136,
+    "test": 34
+  },
+  "stress_label_flip_rate": 0.098485,
+  "stress_label_flips": 572,
+  "stress_flip_band": [
+    0.02,
+    0.3
+  ],
+  "stress_flip_in_band": true,
+  "degeneracy_report": {
+    "groups": 170,
+    "labels": 5808,
+    "grade_counts": {
+      "0": 1958,
+      "1": 1742,
+      "2": 1405,
+      "3": 703
+    },
+    "grade_shares": {
+      "0": 0.3371,
+      "1": 0.2999,
+      "2": 0.2419,
+      "3": 0.121
+    },
+    "max_grade_share": 0.3371,
+    "max_product_win_share": 0.3824,
+    "max_tenure_win_share": 0.3824,
+    "max_strategy_win_share": 0.5471,
+    "no_good_option_customers": 16,
+    "group_size_min": 2,
+    "group_size_max": 123
+  },
+  "no_good_option_customers": 16
+}

@@ -1,0 +1,402 @@
+{
+  "model_version": "risk-2.0.0",
+  "model_role": "SECONDARY. Output is a feature for the primary recommender and a user-facing risk disclosure. It never selects, gates or vetoes.",
+  "training_labels_are_synthetic": true,
+  "training_label_source": "training/generate_risk_outcomes.py",
+  "training_label_note": "Repayment outcomes are drawn from a documented latent-risk model, not observed. ROC-AUC measures agreement with that generative process, not real credit risk.",
+  "feature_version": "2.0.0",
+  "config_version": "2.0.0",
+  "feature_columns": [
+    "credit_score",
+    "age",
+    "dependents",
+    "employment_type",
+    "employment_years",
+    "monthly_income",
+    "monthly_expenses",
+    "existing_emi",
+    "disposable_income",
+    "debt_burden_ratio",
+    "expense_ratio",
+    "emi_affordability_ceiling",
+    "income_stability_score",
+    "financial_health",
+    "has_portfolio",
+    "portfolio_total_value",
+    "portfolio_liquid_value",
+    "liquidity_ratio",
+    "equity_exposure",
+    "debt_exposure",
+    "crypto_exposure",
+    "concentration_risk",
+    "unrealized_gain_loss",
+    "portfolio_risk",
+    "loan_purpose",
+    "requested_amount",
+    "preferred_tenure_months",
+    "risk_appetite",
+    "requested_to_annual_income",
+    "portfolio_to_requested"
+  ],
+  "feature_manifest": {
+    "feature_version": "2.0.0",
+    "risk_feature_columns": [
+      "credit_score",
+      "age",
+      "dependents",
+      "employment_type",
+      "employment_years",
+      "monthly_income",
+      "monthly_expenses",
+      "existing_emi",
+      "disposable_income",
+      "debt_burden_ratio",
+      "expense_ratio",
+      "emi_affordability_ceiling",
+      "income_stability_score",
+      "financial_health",
+      "has_portfolio",
+      "portfolio_total_value",
+      "portfolio_liquid_value",
+      "liquidity_ratio",
+      "equity_exposure",
+      "debt_exposure",
+      "crypto_exposure",
+      "concentration_risk",
+      "unrealized_gain_loss",
+      "portfolio_risk",
+      "loan_purpose",
+      "requested_amount",
+      "preferred_tenure_months",
+      "risk_appetite",
+      "requested_to_annual_income",
+      "portfolio_to_requested"
+    ],
+    "pair_feature_columns": [
+      "credit_score",
+      "age",
+      "dependents",
+      "employment_type",
+      "employment_years",
+      "monthly_income",
+      "monthly_expenses",
+      "existing_emi",
+      "disposable_income",
+      "debt_burden_ratio",
+      "expense_ratio",
+      "emi_affordability_ceiling",
+      "income_stability_score",
+      "financial_health",
+      "has_portfolio",
+      "portfolio_total_value",
+      "portfolio_liquid_value",
+      "liquidity_ratio",
+      "equity_exposure",
+      "debt_exposure",
+      "crypto_exposure",
+      "concentration_risk",
+      "unrealized_gain_loss",
+      "portfolio_risk",
+      "is_cold_start",
+      "purpose_affinity",
+      "strategy_affinity",
+      "tenure_band_affinity",
+      "session_count",
+      "engagement_score",
+      "prior_declines",
+      "loan_purpose",
+      "requested_amount",
+      "preferred_tenure_months",
+      "risk_appetite",
+      "is_no_loan",
+      "product_lender",
+      "product_primary_purpose",
+      "product_annual_rate",
+      "product_min_amount",
+      "product_max_amount",
+      "product_min_tenure_months",
+      "product_max_tenure_months",
+      "product_min_credit_score",
+      "product_min_monthly_income",
+      "product_processing_fee_pct",
+      "financing_strategy",
+      "candidate_tenure_months",
+      "loan_amount",
+      "emi",
+      "loan_to_annual_income",
+      "emi_to_income",
+      "emi_to_disposable_income",
+      "total_interest",
+      "total_repayment",
+      "interest_to_loan_amount",
+      "post_loan_debt_burden",
+      "affordability_headroom",
+      "affordability_headroom_ratio",
+      "liquidation_amount",
+      "liquidation_to_portfolio",
+      "volatile_liquidation_amount",
+      "volatile_liquidation_to_portfolio",
+      "remaining_portfolio_value",
+      "post_strategy_liquidity_ratio",
+      "tenure_delta_vs_preferred",
+      "amount_delta_vs_requested",
+      "funding_coverage",
+      "risk_pd"
+    ],
+    "enum_encodings": {
+      "loan_purpose": {
+        "HOME": 0,
+        "VEHICLE": 1,
+        "EDUCATION": 2,
+        "PERSONAL": 3,
+        "BUSINESS": 4,
+        "MEDICAL": 5
+      },
+      "employment_type": {
+        "SALARIED": 0,
+        "SELF_EMPLOYED": 1,
+        "CONTRACT": 2,
+        "RETIRED": 3
+      },
+      "financing_strategy": {
+        "BORROW_100": 0,
+        "BORROW_80_LIQUIDATE_20": 1,
+        "BORROW_60_LIQUIDATE_40": 2,
+        "BORROW_40_LIQUIDATE_60": 3,
+        "BORROW_20_LIQUIDATE_80": 4,
+        "LIQUIDATE_100": 5
+      },
+      "financial_health": {
+        "EXCELLENT": 0,
+        "GOOD": 1,
+        "FAIR": 2,
+        "POOR": 3
+      },
+      "portfolio_risk": {
+        "CONSERVATIVE": 0,
+        "BALANCED": 1,
+        "GROWTH": 2,
+        "AGGRESSIVE": 3
+      },
+      "risk_appetite": {
+        "CONSERVATIVE": 0,
+        "MODERATE": 1,
+        "AGGRESSIVE": 2
+      }
+    },
+    "lender_encoding": {
+      "Anvil Credit": 0,
+      "Cobalt Money": 1,
+      "Harbourline Finance": 2,
+      "Ironvale Capital": 3,
+      "Kestrel Housing Finance": 4,
+      "Meridian Bank": 5,
+      "Sundial Credit Union": 6
+    },
+    "unseen_category": -1
+  },
+  "seed": 20260906,
+  "training_rows": 320,
+  "test_rows": 80,
+  "split_source": "phase-7 customer split, extended by the same seed",
+  "searched_grid": {
+    "max_depth": [
+      2,
+      3,
+      4
+    ],
+    "learning_rate": [
+      0.05,
+      0.1
+    ],
+    "n_estimators": [
+      150,
+      300
+    ],
+    "min_child_weight": [
+      1,
+      5
+    ]
+  },
+  "cv_folds": 5,
+  "cv_scoring": "roc_auc",
+  "cv_best_score": 0.663,
+  "best_params": {
+    "learning_rate": 0.05,
+    "max_depth": 4,
+    "min_child_weight": 5,
+    "n_estimators": 150
+  },
+  "training_pd_median": 0.071397,
+  "test_metrics": {
+    "roc_auc": 0.712,
+    "pr_auc": 0.4376,
+    "precision": 0.75,
+    "recall": 0.25,
+    "f1": 0.375,
+    "brier_score": 0.1165,
+    "accuracy": 0.875,
+    "positive_rate_actual": 0.15,
+    "positive_rate_predicted": 0.05,
+    "reliability_curve": [
+      {
+        "bin_low": 0.0,
+        "bin_high": 0.1,
+        "count": 48,
+        "mean_predicted": 0.0443,
+        "observed_rate": 0.0833
+      },
+      {
+        "bin_low": 0.1,
+        "bin_high": 0.2,
+        "count": 14,
+        "mean_predicted": 0.1586,
+        "observed_rate": 0.2857
+      },
+      {
+        "bin_low": 0.2,
+        "bin_high": 0.3,
+        "count": 6,
+        "mean_predicted": 0.2397,
+        "observed_rate": 0.1667
+      },
+      {
+        "bin_low": 0.3,
+        "bin_high": 0.4,
+        "count": 6,
+        "mean_predicted": 0.3499,
+        "observed_rate": 0.0
+      },
+      {
+        "bin_low": 0.4,
+        "bin_high": 0.5,
+        "count": 2,
+        "mean_predicted": 0.4371,
+        "observed_rate": 0.0
+      },
+      {
+        "bin_low": 0.5,
+        "bin_high": 0.6,
+        "count": 2,
+        "mean_predicted": 0.5277,
+        "observed_rate": 0.5
+      },
+      {
+        "bin_low": 0.6,
+        "bin_high": 0.7,
+        "count": 2,
+        "mean_predicted": 0.6762,
+        "observed_rate": 1.0
+      },
+      {
+        "bin_low": 0.7,
+        "bin_high": 0.8,
+        "count": 0,
+        "mean_predicted": null,
+        "observed_rate": null
+      },
+      {
+        "bin_low": 0.8,
+        "bin_high": 0.9,
+        "count": 0,
+        "mean_predicted": null,
+        "observed_rate": null
+      },
+      {
+        "bin_low": 0.9,
+        "bin_high": 1.0,
+        "count": 0,
+        "mean_predicted": null,
+        "observed_rate": null
+      }
+    ]
+  },
+  "train_metrics": {
+    "roc_auc": 0.9861,
+    "pr_auc": 0.9514,
+    "precision": 1.0,
+    "recall": 0.58,
+    "f1": 0.7342,
+    "brier_score": 0.0496,
+    "accuracy": 0.9344,
+    "positive_rate_actual": 0.1562,
+    "positive_rate_predicted": 0.0906,
+    "reliability_curve": [
+      {
+        "bin_low": 0.0,
+        "bin_high": 0.1,
+        "count": 187,
+        "mean_predicted": 0.0421,
+        "observed_rate": 0.0
+      },
+      {
+        "bin_low": 0.1,
+        "bin_high": 0.2,
+        "count": 59,
+        "mean_predicted": 0.1383,
+        "observed_rate": 0.0339
+      },
+      {
+        "bin_low": 0.2,
+        "bin_high": 0.3,
+        "count": 22,
+        "mean_predicted": 0.2381,
+        "observed_rate": 0.1364
+      },
+      {
+        "bin_low": 0.3,
+        "bin_high": 0.4,
+        "count": 11,
+        "mean_predicted": 0.3584,
+        "observed_rate": 0.5455
+      },
+      {
+        "bin_low": 0.4,
+        "bin_high": 0.5,
+        "count": 12,
+        "mean_predicted": 0.4555,
+        "observed_rate": 0.8333
+      },
+      {
+        "bin_low": 0.5,
+        "bin_high": 0.6,
+        "count": 9,
+        "mean_predicted": 0.5489,
+        "observed_rate": 1.0
+      },
+      {
+        "bin_low": 0.6,
+        "bin_high": 0.7,
+        "count": 11,
+        "mean_predicted": 0.6679,
+        "observed_rate": 1.0
+      },
+      {
+        "bin_low": 0.7,
+        "bin_high": 0.8,
+        "count": 7,
+        "mean_predicted": 0.7563,
+        "observed_rate": 1.0
+      },
+      {
+        "bin_low": 0.8,
+        "bin_high": 0.9,
+        "count": 1,
+        "mean_predicted": 0.8024,
+        "observed_rate": 1.0
+      },
+      {
+        "bin_low": 0.9,
+        "bin_high": 1.0,
+        "count": 1,
+        "mean_predicted": 0.9075,
+        "observed_rate": 1.0
+      }
+    ]
+  },
+  "achievable_ceiling": {
+    "oracle_roc_auc": 0.8428,
+    "feature_ceiling_roc_auc": 0.7504,
+    "note": "oracle knows the drawn probability including the unobserved shock; feature_ceiling is the best achievable from RISK_FEATURE_COLUMNS alone."
+  }
+}
